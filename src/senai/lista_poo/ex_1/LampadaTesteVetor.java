@@ -1,6 +1,8 @@
 package senai.lista_poo.ex_1;
 
 import java.util.Scanner;
+import static senai.lista_poo.ex_1.Lampada.exibirQuantidadeLampada;
+import static senai.lista_poo.ex_1.Lampada.exibirQuantidadePotencia;
 
 public class LampadaTesteVetor {
     public static void main(String[] args) {
@@ -15,6 +17,10 @@ public class LampadaTesteVetor {
         do{
             System.out.println("==== Escolha sua opçao ====");
             System.out.println("1 - cadastrar lampada");
+            System.out.println("2 - exibir lampada cadastradas");
+            System.out.println("3 - exibir quantidade de lampadas cadastradas");
+            System.out.println("4 - exibir quantidade de determinada potencia");
+            System.out.println("5 - Exibir os dados das lâmpadas com preço menor do que o preço médio");
             System.out.println("8 - sair");
             opcao = sc.nextInt();
             
@@ -23,26 +29,56 @@ public class LampadaTesteVetor {
             switch (opcao) {
                 case 1:
                     if(contCadastros<15){
-                        System.out.println("=== Inicializando cadastro ===");
+                        System.out.println("=== Inicializando cadastro ===\n");
                    
-                        
                         lampadas[contCadastros] = new Lampada().cadastrarLampada(sc);
                         
                         contCadastros++;
                    
-                        System.out.println("=== Cadastro finalizado ===");
+                        System.out.println("=== Cadastro finalizado ===\n");
                     }else{
-                        System.out.println("Limite de cadastros de lampadas atingido!");
+                        System.out.println("\nLimite de cadastros de lampadas atingido!\n");
                     }
                     break;
+                case 2:
+                    if(contCadastros>0){
+                        System.out.println("\n=== Inicializando Exibicao ===\n");
+                        
+                        for (int i = 0; i < contCadastros; i++) {
+                            
+                            System.out.println("\n"+(i+1)+"ª LAMPADA");
+                            lampadas[i].exibirLampadas();
+                        }
+                    }else{
+                        System.out.println("\nNenhuma lampada foi cadastrada\n");
+                        break;
+                    }
+                    System.out.println("\n=== Exibicao finalizada ===\n");
+                    break;
+                case 3:
+                    System.out.println("\n=== Inicializando quantidade de lampadas cadastradas ===\n");
+                    
+                    exibirQuantidadeLampada(contCadastros);
+                    
+                    System.out.println("\n=== Exibicao finalizada ===\n");
+                    break;
+                case 4:
+                    System.out.println("Informe o valor da potencia que deseja verificar");
+                    float potenciaValor = sc.nextFloat();
+                    
+                    System.out.println("=== Inicializando Exibicao da Potencia ===\n");
+                    
+                    exibirQuantidadePotencia(potenciaValor, lampadas, contCadastros);
+                    
+                    System.out.println("\n=== Exibicao finalizada ===\n");
+                    break;
                 case 8:
-                    System.out.println("Finalizando programa");
+                    System.out.println("\nFinalizando programa");
                     break;
                 default:
-                    System.out.println("Opcao invalidade! Tente novamente.");
+                    System.out.println("\nOpcao invalidade! Tente novamente\n");
             }
         }while(opcao!=8);
-        
         
         sc.close();
     }
