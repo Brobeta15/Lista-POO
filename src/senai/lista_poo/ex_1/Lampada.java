@@ -73,18 +73,18 @@ public class Lampada {
     private void verificarStatus(boolean status){
         
         if(status==true){
-            System.out.println("O status: acessa");
+            System.out.println("status: acessa");
         }else{
-            System.out.println("O status: apagada");
+            System.out.println("status: apagada");
         }
     }
     public void exibirLampadas(){
-        System.out.println("O tipo: "+tipo);
-        System.out.println("A voltagem: "+voltagem);
-        System.out.println("A cor: "+cor);
-        System.out.println("A marca: "+marca);
-        System.out.println("O preco: "+preco);
-        System.out.println("A potencia: "+potencia);
+        System.out.println("O tipo: "+getTipo());
+        System.out.println("A voltagem: "+getVoltagem());
+        System.out.println("A cor: "+getCor());
+        System.out.println("A marca: "+getMarca());
+        System.out.println("O preco: "+getPreco());
+        System.out.println("A potencia: "+getPotencia());
         verificarStatus(status);
     }
     public static void exibirQuantidadeLampada(int contCadastros){
@@ -104,16 +104,77 @@ public class Lampada {
         }
         System.out.println("A quantidade de potencias "+potenciaValor+" e: "+contPotencia);
     }
-    private float calcularMediaPreco(Lampada[] lampadas, int contCadastros){
+    private static float calcularMediaPreco(Lampada[] lampadas, int contCadastros){
         
         float somaPreco = 0;
         
-        for (int i = 0; i <= contCadastros; i++) {
+        for (int i = 0; i <contCadastros; i++) {
             
             somaPreco += lampadas[i].preco;
             
         }
         float mediaPreco = somaPreco/(contCadastros+1);
         return mediaPreco;
+    }
+    public static void exibirMenorPreco(Lampada[] lampadas, int contCadastros){
+        
+        if(contCadastros>0){
+            float mediaPreco = calcularMediaPreco(lampadas, contCadastros);
+        
+            for (int i = 0; i < contCadastros; i++) {
+            
+                if(lampadas[i].preco < mediaPreco){
+                
+                    lampadas[i].exibirLampadas();
+                }
+                System.out.println("\n");
+            }   
+        }else{
+            System.out.println("Nenhuma lampada cadastrada!");
+        }
+    }
+    private String getTipo() {
+        return this.tipo;
+    }
+
+    private float getVoltagem() {
+        return this.voltagem;
+    }
+
+    private String getCor() {
+        return this.cor;
+    }
+
+    private String getMarca() {
+        return this.marca;
+    }
+
+    private float getPreco() {
+        return this.preco;
+    }
+
+    private float getPotencia() {
+        return this.potencia;
+    }
+    public static void exibirStatusLampadas(Lampada[] lampadas, int contCadastros){
+
+        if(contCadastros>0){
+            int contAcessas = 0;
+            int contApagadas = 0;
+        
+            for (int i = 0; i < contCadastros; i++) {
+                
+                if(lampadas[i].status == true){
+                    contAcessas++;
+                    
+                }else{
+                    contApagadas++;
+                }
+            }
+            System.out.println("Quantidade de lampadas acessas: "+contAcessas);
+            System.out.println("Quantidade de lampadas apagadas: "+contApagadas);
+        }else{
+            System.out.println("Nenhuma lamapda foi cadastrada!");
+        }
     }
 }
